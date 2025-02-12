@@ -408,7 +408,7 @@ button:hover {
 
 /* Phone image on the left */
 .image {
-    width: 100px; /* Adjust width as needed */
+    width: 90; /* Adjust width as needed */
     height: auto;
     order: 2; /* Ensures the image is on the left */
 }
