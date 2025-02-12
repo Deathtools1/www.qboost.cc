@@ -415,7 +415,7 @@ button:hover {
 
 /* Phone image on the left */
 .phoneee {
-    width: 200px; /* Adjust width as needed */
+    width: 400px; /* Adjust width as needed */
     height: auto;
     order: 1; /* Ensures the image is on the left */
 }
