@@ -410,7 +410,7 @@ button:hover {
 .image {
     width: 400px; /* Adjust width as needed */
     height: auto;
-    order: 1; /* Ensures the image is on the left */
+    order: 2; /* Ensures the image is on the left */
 }
 
 /* Phone image on the left */
