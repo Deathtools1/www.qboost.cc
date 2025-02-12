@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QBoost - Wallet Friendly Boosting</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: white;
+        }
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(90deg, #8D3CFF, #5920A2);
+            background-size: 200% 100%;
+            animation: gradientMove 15s linear infinite;
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee {
+            display: flex;
+            width: max-content;
+            animation: scroll 60s linear infinite;
+        }
+        .marquee:hover {
+            animation-play-state: paused;
+        }
+        .marquee-item {
+            white-space: nowrap;
+            padding: 0 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <section class="marquee-container">
+        <div class="marquee">
+            <div class="marquee-item">QBoost | #1 Wallet Friendly Boosting Service <span class="separator">•</span></div>
+            <div class="marquee-item">QBoost | #1 Wallet Friendly Boosting Service <span class="separator">•</span></div>
+            <div class="marquee-item">QBoost | #1 Wallet Friendly Boosting Service <span class="separator">•</span></div>
+            <div class="marquee-item">QBoost | #1 Wallet Friendly Boosting Service <span class="separator">•</span></div>
+            <div class="marquee-item">QBoost | #1 Wallet Friendly Boosting Service <span class="separator">•</span></div>
+            <div class="marquee-item">QBoost | #1 Wallet Friendly Boosting Service <span class="separator">•</span></div>
+        </div>
+    </section>
+</body>
+</html>
