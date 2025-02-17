@@ -25,7 +25,7 @@ app.post('/redeem', async (req, res) => {
         }
 
         // Proceed to call the bot's /redeem command
-        const botToken = 'YOUR_BOT_TOKEN'; // Replace with your bot's token
+        const botToken = 'MTMxNDAzMzM3ODEzNTI0NDg5MQ.GL-Le_.GkXGqt01K41XCkFSnEyTMH0ILZMWv3jhxNom6E'; // Replace with your bot's token
         const discordApiUrl = `https://discord.com/api/v10/interactions`;
 
         const commandData = {
