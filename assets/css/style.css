@@ -554,3 +554,110 @@ button:hover {
 .cta .btn:hover {
     background-color: #7a00cc; /* Slightly darker on hover */
 }
+/* Redeem Section Styling */
+#redeem {
+    background-color: #0f0f0f;
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+#redeem h2 {
+    font-size: 2.5rem;
+    color: #8c00ff;
+    margin-bottom: 20px;
+}
+
+#redeem p {
+    font-size: 1.25rem;
+    color: #ccc;
+    margin-bottom: 40px;
+}
+
+/* Form Container */
+.redeem-form {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: #222;
+    color: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #8c00ff;
+    outline: none;
+}
+
+/* Button Styling */
+.btn {
+    background-color: #8c00ff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #6f00d1;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-top: 40px;
+}
+
+a.btn {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #redeem h2 {
+        font-size: 2rem;
+    }
+
+    .redeem-form {
+        padding: 15px;
+        width: 100%;
+    }
+
+    .form-group input,
+    .form-group select {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+    }
+}
