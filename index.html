@@ -90,59 +90,60 @@
 </head>
 <body>
 
+<!-- Redeem Your Key Section -->
 <section id="redeem" class="section">
     <div class="container">
         <h2>Redeem Your Key</h2>
-        <p>Enter your key and Guild ID to redeem boosts.</p>
-        
-        <div class="redeem-form">
-            <div class="form-group">
-                <label for="keyInput">Key:</label>
-                <input type="text" id="keyInput" placeholder="Enter Your Key">
-            </div>
+        <form id="redeem-form">
+            <label for="key">Key:</label>
+            <input type="text" id="key" name="key" required>
 
-            <div class="form-group">
-                <label for="guildIdInput">Guild ID:</label>
-                <input type="text" id="guildIdInput" placeholder="Enter Your Guild ID">
-            </div>
+            <label for="guild-id">Server Invite (Guild ID):</label>
+            <input type="text" id="guild-id" name="guild-id" required>
 
-            <div class="form-group">
-                <label for="durationSelect">Duration:</label>
-                <select id="durationSelect">
-                    <option value="1">1 Month</option>
-                    <option value="3">3 Months</option>
-                </select>
-            </div>
+            <label for="duration">Duration (1 or 3 months):</label>
+            <input type="text" id="duration" name="duration" required>
 
-            <button class="btn" onclick="redeemKey()">Submit</button>
-        </div>
-
-        <h3>Need to invite the bot?</h3>
-        <a href="https://discord.com/oauth2/authorize?client_id=1314033378135244891&permissions=8&integration_type=0&scope=bot" class="btn" target="_blank">Invite The Bot</a>
+            <button type="submit" class="btn">Submit</button>
+        </form>
     </div>
 </section>
 
 <script>
-function redeemKey() {
-    const key = document.getElementById("keyInput").value;
-    const guildId = document.getElementById("guildIdInput").value;
-    const duration = document.getElementById("durationSelect").value;
+    // JavaScript to handle form submission
+    document.getElementById("redeem-form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent the form from refreshing the page
 
-    if (!key || !guildId || !duration) {
-        alert("Please fill in all fields.");
-        return;
-    }
+        // Get the form values
+        const key = document.getElementById("key").value;
+        const guildId = document.getElementById("guild-id").value;
+        const duration = document.getElementById("duration").value;
 
-    // Send a POST request to the server with the user's input
-    fetch("/redeem", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ key, guildId, duration })
-    })
-    .then(response => response.json())
-    .then(data => alert(data.message))
-    .catch(error => console.error("Error:", error));
-}
+        // Send data to backend via POST request
+        fetch("/redeem", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                key: key,
+                guildId: guildId,
+                duration: duration
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Boosting initiated!");
+            } else {
+                alert("Error: " + data.error);
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred.");
+        });
+    });
 </script>
 
     
