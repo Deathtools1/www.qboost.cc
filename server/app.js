@@ -1,61 +1,52 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const axios = require('axios');
-const fs = require('fs');
+const express = require("express");
+const bodyParser = require("body-parser");
+const axios = require("axios");
+const fs = require("fs");
+
 const app = express();
 const port = 3000;
 
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // Middleware to parse JSON requests
 
-const keysFilePath = 'keys.txt'; // Path to your keys.txt
+// Read the keys from keys.txt (Assuming each key is on a new line)
+const keys = fs.readFileSync("./server/keys.txt", "utf-8").split("\n").map(key => key.trim());
 
-// Endpoint for redeeming the key
-app.post('/redeem', async (req, res) => {
+// POST endpoint to handle redeeming the key
+app.post("/redeem", async (req, res) => {
     const { key, guildId, duration } = req.body;
 
     // Check if the key is valid
-    fs.readFile(keysFilePath, 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).json({ message: "Error reading keys file." });
-        }
+    if (!keys.includes(key)) {
+        return res.json({ success: false, error: "Invalid key!" });
+    }
 
-        const keys = data.split('\n');
-        if (!keys.includes(key)) {
-            return res.status(400).json({ message: "Invalid key." });
-        }
+    // Check if the duration is valid (either 1 or 3 months)
+    if (duration !== "1" && duration !== "3") {
+        return res.json({ success: false, error: "Invalid duration!" });
+    }
 
-        // Proceed to call the bot's /redeem command
-        const botToken = 'MTMxNDAzMzM3ODEzNTI0NDg5MQ.GL-Le_.GkXGqt01K41XCkFSnEyTMH0ILZMWv3jhxNom6E'; // Replace with your bot's token
-        const discordApiUrl = `https://discord.com/api/v10/interactions`;
+    // Send the /redeem command to the bot
+    try {
+        const botToken = "MTMxNDAzMzM3ODEzNTI0NDg5MQ.GL-Le_.GkXGqt01K41XCkFSnEyTMH0ILZMWv3jhxNom6E";
+        const command = `/redeem ${guildId} ${key} ${duration}`;
 
-        const commandData = {
-            type: 1, // The type for interaction (simple command)
+        // Make a request to the bot (replace with your bot API if using one)
+        await axios.post(`https://discord.com/api/v9/interactions`, {
+            type: 1,
             data: {
-                name: 'redeem',
-                options: [
-                    { name: 'guild_id', value: guildId },
-                    { name: 'key', value: key },
-                    { name: 'token_type', value: duration }
-                ]
+                content: command,
+                token: botToken
             }
-        };
-
-        // Call the Discord API to send the interaction
-        axios.post(discordApiUrl, commandData, {
-            headers: {
-                'Authorization': `Bot ${botToken}`
-            }
-        })
-        .then(() => {
-            res.json({ message: "Key redeemed successfully! Boosting server now." });
-        })
-        .catch(err => {
-            res.status(500).json({ message: "Error executing the command." });
         });
-    });
+
+        // Respond back with success
+        res.json({ success: true });
+    } catch (error) {
+        console.error("Error in redeem command:", error);
+        res.json({ success: false, error: "Failed to send command to bot." });
+    }
 });
 
-// Start the server
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Server running at http://localhost:${port}`);
 });
